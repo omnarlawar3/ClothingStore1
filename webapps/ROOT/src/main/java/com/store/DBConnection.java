@@ -3,20 +3,18 @@ package com.store;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConnection {
+public class DatabaseConnection {
+    public static Connection getConnection() throws SQLException {
+        String host = System.getenv("DB_HOST");
+        String port = System.getenv("DB_PORT");
+        String dbName = System.getenv("DB_NAME");
+        String user = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
 
-    public static Connection getConnection() {
-        Connection con = null;
-
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-
-            con = DriverManager.getConnection(
-                "jdbc:postgresql://HOST:PORT/DATABASE",
-                "system",
-                "1234"
-            );
-
+        String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbName;
+        return DriverManager.getConnection(url, user, password);
+    }
+}
             System.out.println("DB Connected Successfully ✅");
 
         } catch (Exception e) {
