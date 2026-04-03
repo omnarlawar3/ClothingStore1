@@ -12,7 +12,7 @@ public class DBConnection {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
             con = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521/FREEPDB1",
+                "jdbc:postgresql://HOST:PORT/DATABASE",
                 "system",
                 "1234"
             );
